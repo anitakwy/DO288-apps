@@ -1,0 +1,124 @@
+{
+  "apiVersion" : "apps.openshift.io/v1",
+  "kind" : "DeploymentConfig",
+  "metadata" : {
+    "annotations" : {
+      "fabric8.io/git-branch" : "micro-config",
+      "fabric8.io/git-commit" : "0ce5e0090f44a04c5ec45f07fe8c914b2617f416",
+      "fabric8.io/git-url" : "https://github.com/anitakwy/DO288-apps"
+    },
+    "creationTimestamp" : "2020-03-27T14:23:08Z",
+    "generation" : 1,
+    "labels" : {
+      "app" : "hello",
+      "group" : "com.redhat.training.openshift",
+      "provider" : "fabric8",
+      "version" : "1.0"
+    },
+    "name" : "hello",
+    "namespace" : "anitakwy-micro-java",
+    "resourceVersion" : "20894792",
+    "selfLink" : "/apis/apps.openshift.io/v1/namespaces/anitakwy-micro-java/deploymentconfigs/hello",
+    "uid" : "7afd38a5-7036-11ea-87eb-0a580a800041"
+  },
+  "spec" : {
+    "replicas" : 1,
+    "revisionHistoryLimit" : 2,
+    "selector" : {
+      "app" : "hello",
+      "group" : "com.redhat.training.openshift",
+      "provider" : "fabric8"
+    },
+    "strategy" : {
+      "activeDeadlineSeconds" : 21600,
+      "resources" : { },
+      "rollingParams" : {
+        "intervalSeconds" : 1,
+        "maxSurge" : "25%",
+        "maxUnavailable" : "25%",
+        "timeoutSeconds" : 3600,
+        "updatePeriodSeconds" : 1
+      },
+      "type" : "Rolling"
+    },
+    "template" : {
+      "metadata" : {
+        "annotations" : {
+          "fabric8.io/git-branch" : "micro-config",
+          "fabric8.io/git-commit" : "0ce5e0090f44a04c5ec45f07fe8c914b2617f416",
+          "fabric8.io/git-url" : "https://github.com/anitakwy/DO288-apps"
+        },
+        "labels" : {
+          "app" : "hello",
+          "group" : "com.redhat.training.openshift",
+          "provider" : "fabric8",
+          "version" : "1.0"
+        }
+      },
+      "spec" : {
+        "containers" : [ {
+          "env" : [ {
+            "name" : "KUBERNETES_NAMESPACE",
+            "valueFrom" : {
+              "fieldRef" : {
+                "apiVersion" : "v1",
+                "fieldPath" : "metadata.namespace"
+              }
+            }
+          } ],
+          "image" : "hello:1.0",
+          "imagePullPolicy" : "IfNotPresent",
+          "name" : "thorntail-v2",
+          "ports" : [ {
+            "containerPort" : 8080,
+            "name" : "http",
+            "protocol" : "TCP"
+          }, {
+            "containerPort" : 9779,
+            "name" : "prometheus",
+            "protocol" : "TCP"
+          }, {
+            "containerPort" : 8778,
+            "name" : "jolokia",
+            "protocol" : "TCP"
+          } ],
+          "resources" : { },
+          "securityContext" : {
+            "privileged" : false,
+            "procMount" : "Default"
+          },
+          "terminationMessagePath" : "/dev/termination-log",
+          "terminationMessagePolicy" : "File"
+        } ],
+        "dnsPolicy" : "ClusterFirst",
+        "restartPolicy" : "Always",
+        "schedulerName" : "default-scheduler",
+        "securityContext" : { },
+        "terminationGracePeriodSeconds" : 30
+      }
+    },
+    "test" : false,
+    "triggers" : [ {
+      "type" : "ConfigChange"
+    }, {
+      "imageChangeParams" : {
+        "automatic" : true,
+        "containerNames" : [ "thorntail-v2" ],
+        "from" : {
+          "kind" : "ImageStreamTag",
+          "name" : "hello:1.0",
+          "namespace" : "anitakwy-micro-java"
+        }
+      },
+      "type" : "ImageChange"
+    } ]
+  },
+  "status" : {
+    "availableReplicas" : 0,
+    "latestVersion" : 0,
+    "observedGeneration" : 0,
+    "replicas" : 0,
+    "unavailableReplicas" : 0,
+    "updatedReplicas" : 0
+  }
+}

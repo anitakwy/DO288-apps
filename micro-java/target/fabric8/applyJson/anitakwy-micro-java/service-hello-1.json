@@ -1,0 +1,45 @@
+{
+  "apiVersion" : "v1",
+  "kind" : "Service",
+  "metadata" : {
+    "annotations" : {
+      "fabric8.io/git-branch" : "micro-config",
+      "fabric8.io/git-commit" : "d926a92454a24acfda4a012f93bde07afdd0f48a",
+      "fabric8.io/git-url" : "https://github.com/anitakwy/DO288-apps",
+      "prometheus.io/port" : "9779",
+      "prometheus.io/scrape" : "true"
+    },
+    "creationTimestamp" : "2020-03-27T14:23:08Z",
+    "labels" : {
+      "app" : "hello",
+      "expose" : "true",
+      "group" : "com.redhat.training.openshift",
+      "provider" : "fabric8",
+      "version" : "1.0"
+    },
+    "name" : "hello",
+    "namespace" : "anitakwy-micro-java",
+    "resourceVersion" : "20905000",
+    "selfLink" : "/api/v1/namespaces/anitakwy-micro-java/services/hello",
+    "uid" : "7ae33bb0-7036-11ea-86ba-0e18b0a4b171"
+  },
+  "spec" : {
+    "clusterIP" : "172.30.25.0",
+    "ports" : [ {
+      "name" : "http",
+      "port" : 8080,
+      "protocol" : "TCP",
+      "targetPort" : 8080
+    } ],
+    "selector" : {
+      "app" : "hello",
+      "group" : "com.redhat.training.openshift",
+      "provider" : "fabric8"
+    },
+    "sessionAffinity" : "None",
+    "type" : "ClusterIP"
+  },
+  "status" : {
+    "loadBalancer" : { }
+  }
+}

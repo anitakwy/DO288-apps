@@ -1,0 +1,21 @@
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    fabric8.io/git-commit: d926a92454a24acfda4a012f93bde07afdd0f48a
+    fabric8.io/git-branch: micro-config
+    fabric8.io/git-url: https://github.com/anitakwy/DO288-apps
+  labels:
+    expose: "true"
+    app: hello
+    provider: fabric8
+    version: "1.0"
+    group: com.redhat.training.openshift
+  name: hello
+spec:
+  port:
+    targetPort: 8080
+  to:
+    kind: Service
+    name: hello
