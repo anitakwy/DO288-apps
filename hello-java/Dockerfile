@@ -1,4 +1,5 @@
 FROM   registry.access.redhat.com/ubi8/ubi:8.0
+# testing
 
 MAINTAINER   Red Hat Training <training@redhat.com>
 
